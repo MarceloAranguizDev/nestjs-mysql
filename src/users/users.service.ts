@@ -19,7 +19,7 @@ export class UsersService {
     });
 
     if (userFound) {
-      return new HttpException(
+      throw new HttpException(
         'Nombre de usuario ya existe',
         HttpStatus.CONFLICT,
       );
@@ -41,7 +41,7 @@ export class UsersService {
     });
 
     if (!userFound) {
-      return new HttpException('Usuario no existe', HttpStatus.NOT_FOUND);
+      throw new HttpException('Usuario no existe', HttpStatus.NOT_FOUND);
     }
     return userFound;
   }
@@ -54,7 +54,7 @@ export class UsersService {
     });
 
     if (!userFound) {
-      return new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
+      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
 
     return this.userRepository.delete({ id });
@@ -76,7 +76,7 @@ export class UsersService {
     });
 
     if (!userFound) {
-      return new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
+      throw new HttpException('Usuario no encontrado', HttpStatus.NOT_FOUND);
     }
     const updateUser = Object.assign(userFound, user);
     return this.userRepository.save(updateUser);
